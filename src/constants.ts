@@ -11,7 +11,7 @@ export default {
    *  Define the list of products to be used by the transaction system to prevent users to send lower or higher price
    *  for these products.
    */
-  products,
+  products: process.env.STEAM_PRODUCTS ? JSON.parse(process.env.STEAM_PRODUCTS) : products,
   /**
    * Useful during transaction creation
    * Steam automatically converts from this currency to the user local currency.
