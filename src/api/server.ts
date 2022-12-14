@@ -21,14 +21,14 @@ declare global {
 }
 
 export default (app: Express, host: string, port: number | string): Express => {
-  const corsOptions = {
-    origin: ['*'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-    optionsSuccessStatus: 200,
-  };
+  // const corsOptions = {
+  //   origin: ['*'],
+  //   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+  //   optionsSuccessStatus: 200,
+  // };
 
   // cors
-  app.use(cors(corsOptions));
+  app.use(cors());
 
   // helmet
   app.use(helmet());
