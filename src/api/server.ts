@@ -10,6 +10,7 @@ import routes from './routes';
 
 import SteamRequest from '@src/steam/steamrequest';
 import httpclient from '@src/lib/httpclient';
+import { IncomingMessage, Server, ServerResponse } from 'http';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -20,12 +21,16 @@ declare global {
   }
 }
 
-export default (app: Express, host: string, port: number | string): Express => {
-  // const corsOptions = {
-  //   origin: ['*'],
-  //   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-  //   optionsSuccessStatus: 200,
-  // };
+export default (
+  app: Express,
+  host: string,
+  port: number | string
+): [Express, Server<typeof IncomingMessage, typeof ServerResponse>] => {
+  const corsOptions = {
+    origin: ['*'],
+    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+    optionsSuccessStatus: 200,
+  };
 
   // cors
   app.use(cors());
@@ -51,10 +56,10 @@ export default (app: Express, host: string, port: number | string): Express => {
   app.use(morgan);
 
   // start the app
-  app.listen(port, () => {
+  const serverListener = app.listen(port, () => {
     // eslint-disable-next-line no-console
     console.log(`Server ${host} started at port:${port}`);
   });
 
-  return app;
+  return [app, serverListener];
 };
