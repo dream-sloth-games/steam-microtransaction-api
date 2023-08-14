@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  steam-microtransaction-api:
+    build: .
+    environment:
+      - STEAM_PRODUCTS
+      - STEAM_WEBKEY
+    ports:
+      - 5001:3000
