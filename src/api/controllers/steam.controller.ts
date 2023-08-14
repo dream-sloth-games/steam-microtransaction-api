@@ -70,7 +70,7 @@ export default {
     }
   },
   initPurchase: async (req: Request, res: Response): Promise<void> => {
-    const { appId, category, itemDescription, itemId, orderId, steamId }: ISteamOpenTransaction = <
+    const { appId, category, itemDescription, itemId, orderId, steamId, usersession, ipaddress }: ISteamOpenTransaction = <
       ISteamOpenTransaction
     >{ ...req.body };
 
@@ -102,6 +102,8 @@ export default {
         itemId,
         orderId,
         steamId,
+        usersession,
+        ipaddress,
       });
 
       const success = data.response.result == 'OK' && data.response.params.transid;
@@ -109,7 +111,7 @@ export default {
       if (!success)
         throw new Error(data.response?.error?.errordesc ?? 'Steam API returned unknown error');
 
-      res.status(200).json({ transid: data.response.params.transid });
+      res.status(200).json({ transid: data.response.params.transid, steamurl: data.response.params.steamurl });
     } catch (err) {
       validateError(res, err);
     }

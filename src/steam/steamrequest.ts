@@ -89,7 +89,13 @@ export default class SteamRequest {
     formData.append('itemcount', '1');
     formData.append('currency', constants.currency);
     formData.append('language', constants.locale);
-    formData.append('usersession', 'client');
+    if (transaction.usersession) {
+      formData.append('usersession', transaction.usersession);
+      formData.append('ipaddress', transaction.ipaddress);
+    }
+    else {
+      formData.append('usersession', 'client');
+    }
     formData.append('itemid[0]', transaction.itemId);
     formData.append('qty[0]', '1');
     formData.append('amount[0]', transaction.amount + constants.currency);

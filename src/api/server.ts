@@ -26,11 +26,11 @@ export default (
   host: string,
   port: number | string
 ): [Express, Server<typeof IncomingMessage, typeof ServerResponse>] => {
-  const corsOptions = {
-    origin: ['*'],
-    allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
-    optionsSuccessStatus: 200,
-  };
+  // const corsOptions = {
+  //   origin: ['*'],
+  //   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept'],
+  //   optionsSuccessStatus: 200,
+  // };
 
   // cors
   app.use(cors());

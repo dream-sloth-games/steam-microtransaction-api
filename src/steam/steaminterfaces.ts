@@ -32,6 +32,8 @@ export declare interface ISteamOpenTransaction extends ISteamUserRequest {
   itemId: string;
   itemDescription: string;
   category: string;
+  usersession?: 'client' | 'web';
+  ipaddress?: string;
 }
 
 export declare interface ISteamOwnershipResponse {
@@ -67,6 +69,7 @@ export declare interface ISteamMicroTx {
     params: {
       orderid: string;
       transid: string;
+      steamurl?: string;
     };
     error: {
       errorcode: string;
